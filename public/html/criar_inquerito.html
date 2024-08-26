@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/corr_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/criar_inquerito.css" />
+    <link rel="stylesheet" href="css/global.css" />
+
+    <link rel="stylesheet" href="/public/css/criar_inquerito.css" />
+    <link rel="stylesheet" href="/public/css/global.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Inicio - Painel Corregedoria</title>
+  </head>
+
+<!-- Começo Side Bar -->
+
+  <nav id="sidebar">
+    <div id="sidebar_content">
+      <div id="user">
+        <img src="/public/img/avatar2.png" id="user_avatar" alt="Avatar" />
+
+        <p id="user_infos">
+          <span class="item-description"> Logan Andrade </span>
+          <span class="item-description" > Cabo </span>
+        </p>
+      </div>
+
+      <ul id="side_items">
+        <li class="side-item">
+            <a href="/public/html/home.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="item-description"> Início </span>
+          </a>
+        </li>
+
+        
+        <li class="side-item active">
+          <a href="/public/html/inqueritos.html">
+            <i class="fa-regular fa-folder-open"></i>
+            <span class="item-description"> Inquéritos </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/public/html/oficiais.html">
+            <i class="fa-solid fa-user-group"></i>
+            <span class="item-description"> Oficiais </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/public/html/blitz.html">
+            <i class="fa-solid fa-road-barrier"></i>
+            <span class="item-description"> Blitz </span>
+          </a>
+        </li>
+
+        <li class="side-item">
+          <a href="/public/html/imagens.html">
+            <i class="fa-solid fa-image"></i>
+            <span class="item-description"> Imagens </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/public/html/logs.html">
+            <i class="fa-solid fa-clock"></i>
+            <span class="item-description"> Logs </span>
+          </a>
+        </li>
+        
+
+        <li class="side-item">
+          <a href="#">
+            <i class="fa-solid fa-gear"></i>
+            <span class="item-description"> Configurações </span>
+          </a>
+        </li>
+      </ul>
+
+      <button id="open_btn">
+        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <a href="/index.html"> <div id="logout">
+      <button id="logout_btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      
+     <span class="item-description"> Logout </span>
+      </button>
+    </div></a>
+  </nav>
+
+  <!-- Fim Side Bar -->
+
+
+  <body>
+    <div class="corpo">
+
+
+      <header> 
+
+        <div class="text_inq">
+        <h1><i class="fa-solid fa-file-lines"></i>Inquéritos</h1>
+      </div>
+
+
+        <!--<div class="logo">
+          <img src="/public/img/corr_icon.png" id="corr_icon" />
+          <div class="logo-text">
+            <h1>CORREGEDORIA</h1>
+            <h2>METRÓPOLE</h2>
+          </div>
+        </div>
+
+
+        <div class="user-info">
+          <div class="logo-text">
+        <h1>Bem-vindo, Logan!</h1>
+        <h2>Quarta-Feira, 21 de Agosto de 2024</h2>
+      </div>
+      
+      </div>
+      -->
+
+<!--
+        <div class="user-info">
+            <div class="logo-text">
+          <h1>Logan Andrade</h1>
+          <h2>Corregedor - Capitão</h2>
+        </div>
+          <img src="/public/img/avatar2.png" id="avatarr" />
+        </div>-->
+      </header>
+
+      <main>
+       <div class="container_all">
+     <div class="inputs_side">
+       <div class="infos">
+        <h1>INQUÉRITO N°0001</h1>
+        <h2>Atualizado 23/04/2024 ás 15h30 -  Cb. Logan Andrade</h2>
+       </div>
+       <div class="inputs">
+      
+        <h3>TÍTULO</h3>
+        <input type="text" name="inTitulo">
+ 
+     
+        <h3>CORREGEDOR</h3>
+        <input type="text" name="inRequerente" id="input_corregedor">
+        <h3>DELATOR</h3>
+        <input type="text" name="inDelator" id="input_delator">
+      
+        <h3>RÉU</h3>
+        <input type="text" name="inReu">
+        <h3>DATA</h3>
+        <input type="date" name="inData">
+        <h3>ENVOLVIDOS SECUNDARIOS</h3>
+        <input type="text" name="inEnvolvidos">
+       </div>
+       <div class="links">
+        <h3>LINKS AUXILIARES <i class="fa-solid fa-link"></i></h3>
+        <ul>
+          <li>Teste</li>
+          <li>Teste</li>
+          <li>Teste</li>
+        </ul>
+       </div>
+     </div>
+
+     <div class="desc_side">
+       <a href="/public/html/criar_inquerito.html">  <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-floppy-disk" id="icon_addinq"></i>SALVAR</button></a> 
+       <a href="/public/html/oficiais_inq.html">  <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-user-group" id="icon_addinq"></i></i>OFICIAIS</button></a>
+       <a href="/public/html/inqueritos.html">  <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-arrow-left" id="icon_addinq"></i></i>VOLTAR</button></a><br> <br><br>
+    
+    
+      <h3>DESCRIÇÃO DO OCORRIDO</h3>
+      <!-- <input type="text" name="inDescricao">-->
+     
+     
+        <textarea id="descricao" placeholder="Descreva o ocorrido aqui..."></textarea>
+    
+     </div>
+    </div>
+      <div class="vertical-line"></div>
+
+
+
+      </main>
+    </div>
+  </body>
+
+  <script>
+    document.getElementById("open_btn").addEventListener("click", function () {
+      document.getElementById("sidebar").classList.toggle("open-sidebar");
+    });
+  </script>
+</html>
