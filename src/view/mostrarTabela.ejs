@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Clientes</title>
+</head>
+
+<body>
+  <p align="center">
+    <font size="20">Resultado da consulta</font>
+    <br /><br />
+    <% for (i=0; i < tabela.rowCount; i++) { %>
+      <font size="15">
+        <%=tabela.rows[i].codigo %>
+          <%=tabela.rows[i].nome %>
+            <%=tabela.rows[i].idade %>
+      </font><br />
+      <%} %>
+  </p>
+</body>
+
+</html>
