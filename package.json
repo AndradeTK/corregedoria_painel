@@ -12,5 +12,15 @@
     "mysql-backup": "^1.0.0",
     "mysql2": "^3.11.4",
     "os": "^0.1.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "corregedoria_painel",
+  "version": "1.0.0",
+  "description": "system",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
