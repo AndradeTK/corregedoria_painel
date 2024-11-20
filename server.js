@@ -1,11 +1,11 @@
 const express = require('express');
 const session = require('express-session');
-const RedisStore = require('connect-redis').default;
+
 const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios'); 
 const os = require('os'); // Para obter informações do sistema
-const Redis = require('ioredis');
+
 
 const { Client, GatewayIntentBits } = require('discord.js');
 
@@ -39,20 +39,7 @@ const configRoutes = require('./routes/configRoutes');
 const { config } = require('dotenv');
 
 // ============================= CONFIG SESSÃO =============================== //
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    secret: process.env.SESSION_SECRET || 'umasecretaqui',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { 
-      maxAge: 24 * 60 * 60 * 1000, // 1 dia
-      secure: true, // Apenas para HTTPS
-      httpOnly: true, // Previne acesso ao cookie via JavaScript
-    },
-  })
-);
-/*
+
 app.use(session({
   secret: 'umasecretaqui',
   resave: false,
@@ -62,6 +49,7 @@ app.use(session({
     secure: true
    } // Altere para true em produção com HTTPS
 }));
+/*
 app.use(session({
     secret: 'corregedoriapaineldoismilvintequadtro#', 
     resave: false,                   
