@@ -20,7 +20,6 @@
   "version": "1.0.0",
   "description": "system",
   "main": "server.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC"
 }
