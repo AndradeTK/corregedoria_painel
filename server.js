@@ -4,8 +4,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios'); 
 const os = require('os'); // Para obter informações do sistema
+const RedisStore = require('connect-redis')(session);
+const Redis = require('ioredis');
 
 const { Client, GatewayIntentBits } = require('discord.js');
+
+const redisClient = new Redis(process.env.REDIS_URL); // Configure o Redis usando uma variável de ambiente
 
 require('dotenv').config({ path: './src/config/.env' });
 const port = process.env.port
@@ -35,17 +39,30 @@ const configRoutes = require('./routes/configRoutes');
 const { config } = require('dotenv');
 
 // ============================= CONFIG SESSÃO =============================== //
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }),
+    secret: process.env.SESSION_SECRET || 'umasecretaqui',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      maxAge: 24 * 60 * 60 * 1000,  // 1 dia
+      secure: true, // Cookies seguros em HTTPS
+      httpOnly: true, // Previne acesso ao cookie via JavaScript
+    },
+  })
+);
+/*
 app.use(session({
   secret: 'umasecretaqui',
   resave: false,
   saveUninitialized: true,
   cookie: { 
     maxAge: 24 * 60 * 60 * 1000,  
-    secure: false
+    secure: true
    } // Altere para true em produção com HTTPS
 }));
-
-/*app.use(session({
+app.use(session({
     secret: 'corregedoriapaineldoismilvintequadtro#', 
     resave: false,                   
     saveUninitialized: false,         
