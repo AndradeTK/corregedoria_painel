@@ -9,7 +9,6 @@ const os = require('os'); // Para obter informações do sistema
 
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const redisClient = new Redis(process.env.REDIS_URL); // Configure o Redis usando uma variável de ambiente
 
 require('dotenv').config({ path: './src/config/.env' });
 const port = process.env.port
