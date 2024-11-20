@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
+const RedisStore = require('connect-redis').default;
 const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios'); 
@@ -46,8 +46,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: { 
-      maxAge: 24 * 60 * 60 * 1000,  // 1 dia
-      secure: true, // Cookies seguros em HTTPS
+      maxAge: 24 * 60 * 60 * 1000, // 1 dia
+      secure: true, // Apenas para HTTPS
       httpOnly: true, // Previne acesso ao cookie via JavaScript
     },
   })
