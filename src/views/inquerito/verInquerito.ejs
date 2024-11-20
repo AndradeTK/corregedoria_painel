@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/corr_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/mostrarInquerito.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit_square" />
+    <title>Inquérito N°<%= inquerito.id %> - Painel Corregedoria</title>
+  </head>
+
+  <!-- Side Bar -->
+
+  <nav id="sidebar">
+    <div id="sidebar_content">
+      <div id="user">
+        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" id="user_avatar" alt="Avatar" />
+        <p id="user_infos">
+           <span class="item-description"> <%= user.nomepm == null ? user.username : user.nomepm %> </span>
+           <span class="item-description" > <%= user.patentepm == null ?user.id : user.patentepm %> </span>
+         </p>
+      </div>
+
+      <ul id="side_items">
+        <li class="side-item ">
+            <a href="/home">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="item-description"> Início </span>
+          </a>
+        </li>
+
+        
+        <li class="side-item active">
+          <a href="/inqueritos">
+            <i class="fa-regular fa-folder-open"></i>
+            <span class="item-description"> Inquéritos </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/oficiais">
+            <i class="fa-solid fa-user-group"></i>
+            <span class="item-description"> Oficiais </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/blitz">
+            <i class="fa-solid fa-road-barrier"></i>
+            <span class="item-description"> Blitz </span>
+          </a>
+        </li>
+
+        <li class="side-item">
+          <a href="/imagens">
+            <i class="fa-solid fa-image"></i>
+            <span class="item-description"> Imagens </span>
+          </a>
+        </li>
+
+
+
+
+        <%if (perm) { %>
+          <li class="side-item">
+            <a href="/logs">
+              <i class="fa-solid fa-clock"></i>
+              <span class="item-description"> Logs </span>
+            </a>
+          </li>
+          
+  
+          <li class="side-item">
+            <a href="/configuracoes">
+              <i class="fa-solid fa-gear"></i>
+              <span class="item-description"> Configurações </span>
+            </a>
+          </li>
+        <%}%>
+      </ul>
+
+      <button id="open_btn">
+        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <a href="/logout"> <div id="logout">
+      <button id="logout_btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      
+     <span class="item-description"> Logout </span>
+      </button>
+    </div></a>
+  </nav>
+
+  <!-- Fim Side Bar -->
+
+  <body>
+    <div class="corpo">
+      <header>
+        <div class="text_inq">
+          <h1><i class="fa-solid fa-file-lines"></i>Inquéritos</h1>
+        </div>
+      </header>
+
+      <main>
+        <div id="alerta" class="alerta">
+          <div class="alerta-content">
+              <i class="fa-regular fa-circle-check"></i>
+              <span id="mensagem">Sucesso! Inquérito salvo. </span>
+          </div>
+          <div id="barraProgresso" class="barra-progresso"></div>
+      </div>
+  
+        <div class="container_all">
+          <div class="inputs_side">
+            <div class="infos">
+              <h1>INQUÉRITO N°<%= inquerito.id %></h1>
+              <h2>Atualizado <%= new Date(inquerito.data_atualizacao).toLocaleDateString() %> ás <%= new Date(inquerito.data_atualizacao).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })  %> - <%= (inquerito.autor_atualizacao) %></h2>
+            </div>
+            <div class="inputs">
+              <form action="/inqueritos/salvar" method="POST">
+                <input type="hidden" name="inqueritoId" value="<%= inquerito.id %>">
+              <h3>TÍTULO</h3>
+              <input type="text" name="inTitulo" value="<%= inquerito.titulo %>" required/>
+              <h3>TIPO</h3>
+              <input type="text" name="inTipo" value="<%= inquerito.tipo %>" required/>
+
+              <h3>CORREGEDOR</h3>
+              <input type="text" name="inRequerente" id="input_corregedor" value="<%= inquerito.requerente %>" required/>
+
+              <h3>DELATOR</h3>
+              <input type="text" name="inDelator" id="input_delator" value="<%= inquerito.delator %>" required/>
+
+              <h3>RÉU</h3>
+              <input type="text" name="inReu" value="<%= inquerito.reu %>" required/>
+
+              <h3>ENVOLVIDOS SECUNDARIOS</h3>
+              <input type="text" name="inEnvolvidos" value="<%= inquerito.envolvidos_secundarios %>" />
+
+              <h3>DATA</h3>
+              <input type="date" name="inData" value="<%= new Date(inquerito.data_ocorrencia).toISOString().substring(0, 10) %>" required/>
+
+              <h3>STATUS</h3>
+              <input type="text" name="inStatus" placeholder="Em Andamento" value="Em Andamento" required/>
+            </div>
+            <div class="links">
+              <!-- Adicione este bloco no local adequado dentro de sua seção de adição de links -->
+              <div id="addLinkBox" class="hidden">
+                <div class="add-link-content">
+                  <h2>ADICIONAR LINK <i class="fa-solid fa-link"></i></h2>
+                  <p id="labelslink">TEXTO DO LINK:</p>
+                  <input type="text" id="newText" placeholder="Gravação do Acontecido" />
+                  <p id="labelslink">LINK:</p>
+                  <input type="text" id="newLink" placeholder="https://youtube.com/url" />
+                  <button id="cancelLinkButton" type="button"><i class="fa-solid fa-x"></i> Cancelar</button>
+                  <button id="confirmLinkButton" type="button"><i class="fa-solid fa-plus"></i> Adicionar</button>
+                </div>
+              </div>
+              <h3>LINKS AUXILIARES <button id="add_links" type="button"><i class="fa-solid fa-link"></i></button> </h3>
+              <input type="hidden" id="inLinkHidden" name="inLink" />
+  
+              <ul>
+                <% if (links.length > 0) { %>
+                  <% links.forEach(function(link) { %>
+                    <li>
+                      <a href="<%= link.url %>" target="_blank"><%= link.nome_link %></a>  
+                    </li>
+                  <% }) %>
+                <% } else { %>
+                  <li>Nenhum link anexado.</li>
+                <% } %>
+              </ul>
+            </div>
+         <!-- <div class="links">
+            
+              <div id="addLinkBox" class="hidden">
+                <div class="add-link-content">
+                  <h2>ADICIONAR LINK</h2>
+                  <input type="text" id="newText" placeholder="Texto do link" />
+                  <input type="text" id="newLink" placeholder="Insira o link aqui" />
+                  <button id="cancelLinkButton" type="button">Cancelar</button>
+                  <button id="confirmLinkButton" type="button">Adicionar</button>
+                </div>
+              </div>
+              <h3>LINKS AUXILIARES <button id="add_links" type="button"><i class="fa-solid fa-link"></i></button> </h3>
+              <input type="hidden" id="inLinkHidden" name="inLink" />
+  
+              <ul>
+                <% if (links.length > 0) { %>
+                  <% links.forEach(function(link) { %>
+                    <li>
+                      <a href="<%= link.url %>" target="_blank"><%= link.nome_link %></a>  <button id="remove_links"><i class="fa fa-times-circle"></i></button>
+                    </li>
+                  <% }) %>
+                <% } else { %>
+                  <li>Nenhum link anexado.</li>
+                <% } %>
+              </ul>
+            </div> -->
+         
+          </div>
+
+          <div class="desc_side">
+            <button class="new-inquiry" id="btn_addinq" onclick="mostrarAlerta()">
+              <i class="fa-solid fa-floppy-disk" id="icon_addinq"></i>
+              SALVAR
+            </button>
+
+            <!--
+            <button class="new-inquiry" id="btn_addinq" type="button" onclick="window.location.href='/oficiais'"><i
+                class="fa-solid fa-user-group" id="icon_addinq"></i>OFICIAIS</button>-->
+
+            <button class="new-inquiry" id="btn_addinq" type="button" onclick="window.history.back()"><i
+                class="fa-solid fa-arrow-left" id="icon_addinq"></i>VOLTAR</button>
+             
+            <br><br><br>
+            <h3>DESCRIÇÃO DO OCORRIDO</h3>
+              
+              <textarea id="descricao" placeholder="Descreva o ocorrido aqui..." name="inDesc" required><%= inquerito.descricao %></textarea>
+              
+              
+            </div>
+          </div>
+        </form>
+        <div class="vertical-line"></div>
+      </main>
+    </div>
+  </body>
+
+  
+
+
+
+  <script src="/scripts/inqueritos.js"></script>
+
+</html>

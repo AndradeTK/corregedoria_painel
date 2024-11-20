@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/corr_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/mostrarOficial.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title><%= oficial.nome %> - Painel Corregedoria</title>
+  </head>
+
+<!-- Começo Side Bar -->
+<nav id="sidebar">
+  <div id="sidebar_content">
+    <div id="user">
+     <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" id="user_avatar" alt="Avatar" />
+      <p id="user_infos">
+        <span class="item-description"> <%= user.nomepm == null ? user.username : user.nomepm %> </span>
+        <span class="item-description" > <%= user.patentepm == null ?user.id : user.patentepm %> </span>
+      </p>
+    </div>
+
+    <ul id="side_items">
+      <li class="side-item ">
+          <a href="/home">
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="item-description"> Início </span>
+        </a>
+      </li>
+
+      
+      <li class="side-item ">
+        <a href="/inqueritos">
+          <i class="fa-regular fa-folder-open"></i>
+          <span class="item-description"> Inquéritos </span>
+        </a>
+      </li>
+
+
+      <li class="side-item active">
+        <a href="/oficiais">
+          <i class="fa-solid fa-user-group"></i>
+          <span class="item-description"> Oficiais </span>
+        </a>
+      </li>
+
+
+      <li class="side-item">
+        <a href="/blitz">
+          <i class="fa-solid fa-road-barrier"></i>
+          <span class="item-description"> Blitz </span>
+        </a>
+      </li>
+
+      <li class="side-item">
+        <a href="/imagens">
+          <i class="fa-solid fa-image"></i>
+          <span class="item-description"> Imagens </span>
+        </a>
+      </li>
+
+
+        <%if (perm) { %>
+          <li class="side-item">
+            <a href="/logs">
+              <i class="fa-solid fa-clock"></i>
+              <span class="item-description"> Logs </span>
+            </a>
+          </li>
+          
+  
+          <li class="side-item">
+            <a href="/configuracoes">
+              <i class="fa-solid fa-gear"></i>
+              <span class="item-description"> Configurações </span>
+            </a>
+          </li>
+        <%}%>
+    </ul>
+
+    <button id="open_btn">
+      <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <a href="/logout"> <div id="logout">
+    <button id="logout_btn">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    
+   <span class="item-description"> Logout </span>
+    </button>
+  </div></a>
+</nav>
+
+  <!-- Fim Side Bar -->
+
+
+  <body>
+    <div class="corpo">
+
+
+      <header> 
+
+        <div class="text_inq">
+            <h1> <i class="fa-solid fa-user-group"></i>Oficiais</h1>
+      </div>
+
+
+        <!--<div class="logo">
+          <img src="/public/img/corr_icon.png" id="corr_icon" />
+          <div class="logo-text">
+            <h1>CORREGEDORIA</h1>
+            <h2>METRÓPOLE</h2>
+          </div>
+        </div>
+
+
+        <div class="user-info">
+          <div class="logo-text">
+        <h1>Bem-vindo, Logan!</h1>
+        <h2>Quarta-Feira, 21 de Agosto de 2024</h2>
+      </div>
+      
+      </div>
+      -->
+
+<!--
+        <div class="user-info">
+            <div class="logo-text">
+          <h1>Logan Andrade</h1>
+          <h2>Corregedor - Capitão</h2>
+        </div>
+          <img src="/public/img/avatar2.png" id="avatarr" />
+        </div>-->
+      </header>
+
+      <main>
+        <div id="alerta" class="alerta">
+          <div class="alerta-content">
+              <i class="fa-regular fa-circle-check"></i>
+              <span id="mensagem">Sucesso! Oficial salvo. </span>
+          </div>
+          <div id="barraProgresso" class="barra-progresso"></div>
+      </div>
+       <div class="container_all">
+     <div class="inputs_side">
+       <div class="infos">
+        <h1><%= oficial.nome %></h1>
+        <h2>Atualizado <%= new Date(oficial.data_atualizacao).toLocaleDateString() %> ás <%= new Date(oficial.data_atualizacao).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })  %> - <%= oficial.autor_atualizacao %></h2>
+       </div>
+       <div class="inputs">
+        <form action="/oficiais/salvar" method="POST">
+        <h3>ID</h3>
+        <input type="number" name="inId_ingame" min="1" value="<%= oficial.id_ingame %>" readonly >
+
+        <h3>ID DISCORD</h3>
+        <input type="number" name="inIdDiscord" min="1" value="<%= oficial.id_discord %>" readonly>
+ 
+     
+     
+        <h3>RG</h3>
+        <input type="text" name="inRg" id="inRg" value="<%= oficial.rg %>" required>
+        <h3>NOME</h3>
+        <input type="text" name="inNome" id="inNome" value="<%= oficial.nome %>" required>
+      
+        <h3>PATENTE</h3>
+        <input type="text" name="inPatente" value="<%= oficial.patente %>" required>
+        <h3>UNIDADE</h3>
+        <input type="text" name="inUnidade" value="<%= oficial.unidade %>" required>
+        <h3>DATA DE REGISTRO</h3>
+        <input type="date" name="inData" value="<%= new Date(oficial.data_registro).toISOString().substring(0, 10) %>" required>
+        <h3>STATUS</h3>
+        <input type="text" name="inStatus" value="<%= oficial.status %>" required>
+       </div>
+       <div class="links">
+        <!-- Adicione este bloco no local adequado dentro de sua seção de adição de links -->
+        <div id="addLinkBox" class="hidden">
+          <div class="add-link-content">
+            <h2>ADICIONAR LINK <i class="fa-solid fa-link"></i></h2>
+            <p id="labelslink">TEXTO DO LINK:</p>
+            <input type="text" id="newText" placeholder="Gravação do Acontecido" />
+            <p id="labelslink">LINK:</p>
+            <input type="text" id="newLink" placeholder="https://youtube.com/url" />
+            <button id="cancelLinkButton" type="button"><i class="fa-solid fa-x"></i> Cancelar</button>
+            <button id="confirmLinkButton" type="button"><i class="fa-solid fa-plus"></i> Adicionar</button>
+          </div>
+        </div>
+        <h3>LINKS AUXILIARES <button id="add_links" type="button"><i class="fa-solid fa-link"></i></button> </h3>
+        <input type="hidden" id="inLinkHidden" name="inLink" />
+
+        <ul>
+          <% if (links.length > 0) { %>
+            <% links.forEach(function(link) { %>
+              <li>
+                <a href="<%= link.url %>" target="_blank"><%= link.nome_link %></a>  <button id="remove_links" type="button"><i class="fa fa-times-circle"></i></button>
+              </li>
+            <% }) %>
+          <% } else { %>
+            <li>Nenhum link anexado.</li>
+          <% } %>
+        </ul>
+      </div>
+     </div>
+
+     <div class="desc_side">
+      <button class="new-inquiry" id="btn_addinq" type="submit" name="b1" onclick="mostrarAlerta()">
+        <i class="fa-solid fa-floppy-disk" id="icon_addinq"></i>
+        SALVAR
+      </button>
+    
+      <button class="new-inquiry" id="btn_addinq" type="button" onclick="window.history.back()"><i
+        class="fa-solid fa-arrow-left" id="icon_addinq"></i>VOLTAR</button> <br> <br> <br>
+    
+    
+      <h3>OBSERVAÇÕES</h3>
+      <!-- <input type="text" name="inDescricao">-->
+     
+     
+        <textarea id="descricao" placeholder="Observações aqui..." name="inDesc"><%= oficial.observacoes %></textarea>
+    
+     </div>
+    </div>
+  </form>
+      <div class="vertical-line"></div>
+
+
+
+      </main>
+    </div>
+  </body>
+
+  <script src="/scripts/oficiais.js"></script>
+</html>

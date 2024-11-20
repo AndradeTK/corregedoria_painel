@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/corr_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/criar_inquerito.css" />
+    <link rel="stylesheet" href="css/global.css" />
+
+    <link rel="stylesheet" href="/public/css/oficiais_inq.css" />
+    <link rel="stylesheet" href="/public/css/global.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Inicio - Painel Corregedoria</title>
+  </head>
+
+<!-- Começo Side Bar -->
+
+  <nav id="sidebar">
+    <div id="sidebar_content">
+      <div id="user">
+        <img src="/public/img/avatar2.png" id="user_avatar" alt="Avatar" />
+
+        <p id="user_infos">
+          <span class="item-description"> Logan Andrade </span>
+          <span class="item-description" > Cabo </span>
+        </p>
+      </div>
+
+      <ul id="side_items">
+        <li class="side-item">
+            <a href="/public/html/home.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="item-description"> Início </span>
+          </a>
+        </li>
+
+        
+        <li class="side-item active">
+          <a href="/public/html/inqueritos.html">
+            <i class="fa-regular fa-folder-open"></i>
+            <span class="item-description"> Inquéritos </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/public/html/oficiais.html">
+            <i class="fa-solid fa-user-group"></i>
+            <span class="item-description"> Oficiais </span>
+          </a>
+        </li>
+
+
+        <li class="side-item">
+          <a href="/public/html/blitz.html">
+            <i class="fa-solid fa-road-barrier"></i>
+            <span class="item-description"> Blitz </span>
+          </a>
+        </li>
+
+        <li class="side-item">
+          <a href="/public/html/imagens.html">
+            <i class="fa-solid fa-image"></i>
+            <span class="item-description"> Imagens </span>
+          </a>
+        </li>
+
+
+
+
+        <%if (perm) { %>
+          <li class="side-item">
+            <a href="/logs">
+              <i class="fa-solid fa-clock"></i>
+              <span class="item-description"> Logs </span>
+            </a>
+          </li>
+          
+  
+          <li class="side-item">
+            <a href="/configuracoes">
+              <i class="fa-solid fa-gear"></i>
+              <span class="item-description"> Configurações </span>
+            </a>
+          </li>
+        <%}%>
+      </ul>
+
+      <button id="open_btn">
+        <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <a href="/index.html"> <div id="logout">
+      <button id="logout_btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      
+     <span class="item-description"> Logout </span>
+      </button>
+    </div></a>
+  </nav>
+
+  <!-- Fim Side Bar -->
+
+
+  <body>
+    <div class="corpo">
+
+
+      <header> 
+
+        <div class="text_inq">
+        <h1><i class="fa-solid fa-file-lines"></i>Inquéritos</h1>
+      </div>
+
+
+      </header>
+
+      <main>
+       <div class="container_all">
+     <div class="inputs_side">
+       <div class="infos">
+        <h1>INQUÉRITO N°0001</h1>
+        <h2>Atualizado 23/04/2024 ás 15h30 -  Cb. Logan Andrade</h2>
+       </div>
+       <div class="inputs">
+      
+        <h3>OFICIAIS</h3>
+        <div class="oficial_sec">
+        <img src="/public/img/avatar2.png" id="corr_icon" />
+        <div class="oficial-text">
+          <h1>Logan Andrade - 1629</h1>
+          <h2>Cabo</h2>
+          
+        </div>
+        <button><i class="fas fa-eye"></i></button>
+      </div>
+        <div class="oficial_sec">
+        <img src="/public/img/avatar2.png" id="corr_icon" />
+        <div class="oficial-text">
+          <h1>Logan Andrade - 1629</h1>
+          <h2>Cabo</h2>
+          
+        </div>
+        <button><i class="fas fa-eye"></i></button>
+      </div>
+        <div class="oficial_sec">
+        <img src="/public/img/avatar2.png" id="corr_icon" />
+        <div class="oficial-text">
+          <h1>Logan Andrade - 1629</h1>
+          <h2>Cabo</h2>
+          
+        </div>
+        <button><i class="fas fa-eye"></i></button>
+      </div>
+ 
+     
+      
+       </div>
+     </div>
+
+     <div class="desc_side">
+       <a href="/public/html/inqueritos.html">  <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-arrow-left" id="icon_addinq"></i></i>VOLTAR</button></a><br> <br><br>
+    
+    
+      <h3>FOTOS</h3>
+      <div class="image-container">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+        <img id="expandImage" src="img/image.png" alt="Imagem Pequena" onclick="expandImage()">
+    </div>
+
+    <div id="modal" class="modal" onclick="closeImage()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
+
+     
+    
+     </div>
+    </div>
+      <div class="vertical-line"></div>
+
+
+
+      </main>
+    </div>
+  </body>
+
+  <script>
+    document.getElementById("open_btn").addEventListener("click", function () {
+      document.getElementById("sidebar").classList.toggle("open-sidebar");
+    });
+
+
+    function expandImage() {
+    var modal = document.getElementById("modal");
+    var fullImage = document.getElementById("fullImage");
+    var smallImage = document.getElementById("expandImage");
+
+    modal.style.display = "block";
+    fullImage.src = smallImage.src;
+}
+
+function closeImage() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+}
+
+  </script>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/corr_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/criar_aviso.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Criar Aviso - Painel Corregedoria</title>
+  </head>
+
+<!-- Começo Side Bar -->
+
+<nav id="sidebar">
+  <div id="sidebar_content">
+    <div id="user">
+      <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" id="user_avatar" alt="Avatar" />
+
+      <p id="user_infos">
+        <span class="item-description"> <%= user.nomepm == null ? user.username : user.nomepm %> </span>
+        <span class="item-description" > <%= user.patentepm == null ?user.id : user.patentepm %> </span>
+      </p>
+    </div>
+
+    <ul id="side_items">
+      <li class="side-item active">
+          <a href="/home">
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="item-description"> Início </span>
+        </a>
+      </li>
+
+      
+      <li class="side-item">
+        <a href="/inqueritos">
+          <i class="fa-regular fa-folder-open"></i>
+          <span class="item-description"> Inquéritos </span>
+        </a>
+      </li>
+
+
+      <li class="side-item">
+        <a href="/oficiais">
+          <i class="fa-solid fa-user-group"></i>
+          <span class="item-description"> Oficiais </span>
+        </a>
+      </li>
+
+
+      <li class="side-item">
+        <a href="/blitz">
+          <i class="fa-solid fa-road-barrier"></i>
+          <span class="item-description"> Blitz </span>
+        </a>
+      </li>
+
+      <li class="side-item">
+        <a href="/imagens">
+          <i class="fa-solid fa-image"></i>
+          <span class="item-description"> Imagens </span>
+        </a>
+      </li>
+
+
+        <%if (perm) { %>
+          <li class="side-item">
+            <a href="/logs">
+              <i class="fa-solid fa-clock"></i>
+              <span class="item-description"> Logs </span>
+            </a>
+          </li>
+          
+  
+          <li class="side-item">
+            <a href="/configuracoes">
+              <i class="fa-solid fa-gear"></i>
+              <span class="item-description"> Configurações </span>
+            </a>
+          </li>
+        <%}%>
+    </ul>
+
+    <button id="open_btn">
+      <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <a href="/logout"> <div id="logout">
+    <button id="logout_btn">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    
+   <span class="item-description"> Logout </span>
+    </button>
+  </div></a>
+</nav>
+
+  <!-- Fim Side Bar -->
+
+
+  <body>
+    <div class="corpo">
+
+
+      <header> 
+
+        <div class="text_inq">
+            <h1> <i class="fa fa-bullhorn" ></i> Avisos</h1>
+      </div>
+
+      </header>
+
+      <main>
+       <div class="container_all">
+     <div class="inputs_side">
+       <div class="infos">
+        <h1>NOVO AVISO</h1>
+        <h2>Criado em <%= new Date().toLocaleDateString() + " ás " + new Date().toLocaleTimeString()%>
+       </div>
+       <form action="/avisos/criar" method="post">
+       <div class="inputs">
+      
+        <h3>AVISO: (Max 1000)</h3>
+        
+        <textarea id="descricao" placeholder="Aviso aqui..." name="inDesc" maxlength="1000"></textarea>
+       </div>
+      
+     </div>
+
+     <div class="desc_side">
+      <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-floppy-disk" id="icon_addinq"></i>SALVAR</button>
+    
+   <button class="new-inquiry" id="btn_addinq"><i class="fa-solid fa-arrow-left" id="icon_addinq"></i></i>VOLTAR</button><br> <br><br>
+    
+    
+     
+    
+     </div>
+    </div>
+    </form>
+      <div class="vertical-line"></div>
+
+
+
+      </main>
+    </div>
+  </body>
+
+ 
+  <script>
+    
+document.getElementById("open_btn").addEventListener("click", function () {
+    document.getElementById("sidebar").classList.toggle("open-sidebar");
+  });
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const addLinkButton = document.getElementById('add_links');
+    const addLinkBox = document.getElementById('addLinkBox');
+    const cancelLinkButton = document.getElementById('cancelLinkButton');
+    const confirmLinkButton = document.getElementById('confirmLinkButton');
+    const newTextInput = document.getElementById('newText');
+    const newLinkInput = document.getElementById('newLink');
+    const linkList = document.querySelector('.links ul');
+    const inLinkHidden = document.getElementById('inLinkHidden'); // campo oculto
+  
+    let linksArray = []; // Array para armazenar os links
+  
+    if (addLinkButton && addLinkBox && cancelLinkButton && confirmLinkButton && newTextInput && newLinkInput && linkList && inLinkHidden) {
+      addLinkButton.addEventListener('click', () => {
+        addLinkBox.classList.remove('hidden');
+      });
+  
+      cancelLinkButton.addEventListener('click', () => {
+        newTextInput.value = '';
+        newLinkInput.value = '';
+        addLinkBox.classList.add('hidden');
+      });
+  
+      confirmLinkButton.addEventListener('click', () => {
+        const textValue = newTextInput.value.trim();
+        const linkValue = newLinkInput.value.trim();
+  
+        if (textValue && linkValue) {
+          const li = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = linkValue;
+          link.textContent = textValue;
+          link.target = '_blank';
+  
+          const removeButton = document.createElement('button');
+          removeButton.classList.add('remove_links');
+          removeButton.innerHTML = '<i class="fa fa-times-circle"></i>';
+  
+          removeButton.addEventListener('click', () => {
+            li.remove();
+            linksArray = linksArray.filter(item => item.link !== linkValue); // Remove o link do array
+            updateHiddenInput();
+          });
+  
+          li.appendChild(link);
+          li.appendChild(removeButton);
+          linkList.appendChild(li);
+  
+          // Adiciona o link ao array
+          linksArray.push({ text: textValue, link: linkValue });
+          updateHiddenInput(); // Atualiza o input oculto
+  
+          newTextInput.value = '';
+          newLinkInput.value = '';
+          addLinkBox.classList.add('hidden');
+        } else {
+          alert('Por favor, preencha ambos os campos.');
+        }
+      });
+  
+      function updateHiddenInput() {
+        // Concatena os links no formato "Texto:Link"
+        inLinkHidden.value = linksArray.map(item => `${item.text}<<!separacao!>>${item.link}`).join(',');
+      }
+    } else {
+      console.error('Elementos necessários não encontrados no DOM.');
+    }
+  });
+  
+
+
+
+  
+/*  
+document.addEventListener('DOMContentLoaded', function() {
+const addLinkButton = document.getElementById('add_links');
+const addLinkBox = document.getElementById('addLinkBox');
+const cancelLinkButton = document.getElementById('cancelLinkButton');
+const confirmLinkButton = document.getElementById('confirmLinkButton');
+const newTextInput = document.getElementById('newText');
+const newLinkInput = document.getElementById('newLink');
+const linkList = document.querySelector('.links ul');
+
+if (addLinkButton && addLinkBox && cancelLinkButton && confirmLinkButton && newTextInput && newLinkInput && linkList) {
+  
+  addLinkButton.addEventListener('click', () => {
+    addLinkBox.classList.remove('hidden');
+  });
+
+  cancelLinkButton.addEventListener('click', () => {
+    newTextInput.value = '';
+    newLinkInput.value = '';
+    addLinkBox.classList.add('hidden');
+  });
+
+  
+  confirmLinkButton.addEventListener('click', () => {
+    const textValue = newTextInput.value.trim();
+    const linkValue = newLinkInput.value.trim();
+
+    if (textValue && linkValue) {
+      // Cria o item da lista
+      const li = document.createElement('li');
+      
+      // Cria o link
+      const link = document.createElement('a');
+      link.href = linkValue;
+      link.textContent = textValue;
+      link.target = '_blank';
+
+      // Cria o botão de remoção (X)
+      const removeButton = document.createElement('button');
+      removeButton.classList.add('remove_links');  // Adiciona a classe para estilização
+      removeButton.innerHTML = '<i class="fa fa-times-circle"></i>';
+
+      // Adiciona o evento de remoção ao botão
+      removeButton.addEventListener('click', () => {
+        li.remove(); // Remove o item da lista quando o botão for clicado
+      });
+
+      // Adiciona o link e o botão "X" ao item da lista
+      li.appendChild(link);
+      li.appendChild(removeButton);
+      linkList.appendChild(li);
+
+      // Limpa os campos de texto e esconde o box de adição de links
+      newTextInput.value = '';
+      newLinkInput.value = '';
+      addLinkBox.classList.add('hidden');
+    } else {
+      alert('Por favor, preencha ambos os campos.');
+    }
+  });
+
+
+
+
+
+
+
+
+  
+} else {
+  console.error("Elementos necessários não encontrados no DOM.");
+}
+});
+
+*/
+
+
+function mostrarAlerta() {
+  var alerta = document.getElementById('alerta');
+  var barra = document.getElementById('barraProgresso');
+
+  alerta.style.display = 'block';
+
+  // Reseta a animação da barra de progresso
+  barra.style.animation = 'none';
+  setTimeout(function() {
+      barra.style.animation = '';
+  }, 3);
+
+  // Esconde o alerta após 5 segundos
+  setTimeout(function() {
+      alerta.style.display = 'none';
+  }, 2000);
+}
+
+  </script>
+</html>
