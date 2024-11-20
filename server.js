@@ -1,10 +1,10 @@
 const express = require('express');
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios'); 
 const os = require('os'); // Para obter informações do sistema
-const RedisStore = require('connect-redis')(session);
 const Redis = require('ioredis');
 
 const { Client, GatewayIntentBits } = require('discord.js');
