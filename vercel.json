@@ -16,10 +16,6 @@
     "NODE_ENV": "production",
     "PORT": "3000"
   },
-  "ignore": [
-    "corregedoria_painel.sql",
-    "package-lock.json"
-  ],
   "static": {
     "directory": "public"
   }
