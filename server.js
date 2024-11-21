@@ -45,7 +45,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { 
     maxAge: 24 * 60 * 60 * 1000,  
-    secure: true
+    secure: false
    } // Altere para true em produção com HTTPS
 }));
 /*
@@ -117,7 +117,7 @@ app.use((req, res, next) => {
     res.status(404).send("Desculpe, não conseguimos encontrar essa página.");
   }) // Erro 404
 
-  app.listen(port, async function (erro) {
+  app.listen(process.env.PORT, async function (erro) {
     if (erro) {
       console.log("❌ » Erro :" + erro);
     } else {
